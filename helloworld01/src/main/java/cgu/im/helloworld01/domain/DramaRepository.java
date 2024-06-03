@@ -28,4 +28,14 @@ public interface DramaRepository extends CrudRepository<Drama, Long> {
     @Query("select d from Drama d where d.dramaIntro like %?1%")
     List<Drama> findByDramaIntroContaining(String name);
 
+    //查找某類型的戲劇
+    @Query(value = "SELECT d.id, d.drama_name, d.drama_country, d.drama_intro, d.drama_year, d.drama_episode, " +
+            "GROUP_CONCAT(c.class_name) AS drama_class " +
+            "FROM class_of_drama cod " +
+            "JOIN drama d ON d.id = cod.drama_id " +
+            "JOIN class c ON cod.class_id = c.classid " +
+            "WHERE c.class_name = :className " +
+            "GROUP BY d.id, d.drama_name, d.drama_country, d.drama_intro, d.drama_year",
+    nativeQuery = true)
+    List<Drama> findDramaWithClassesByClassName(@Param("className") String className);
 }

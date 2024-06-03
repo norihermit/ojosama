@@ -129,12 +129,12 @@ public class Helloworld01Application implements CommandLineRunner {
             logger.info("name: {},dramaIntro: {}",
             d.getDramaName(),d.getDramaIntro());
         }
-//        // 查詢某個類別對應的所有戲劇
-//        List<Drama> thrillers = codrepository.findDramasByClassName("驚悚");
-//        logger.info("Thriller dramas:");
-//        for (Drama d : thrillers) {
-//            logger.info("DramaName: {}", d.getDramaName());
-//        }
+        // 查詢某個類別對應的所有戲劇
+        List<Drama> thrillers = drepository.findDramaWithClassesByClassName("驚悚");
+        logger.info("有驚悚類型的電影:");
+        for (Drama c : thrillers) {
+            logger.info("DramaName: {}", c.getDramaName());
+        }
 	}
 
 }
