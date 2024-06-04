@@ -16,14 +16,15 @@ import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import TextField from '@mui/material/TextField'; // 導入文字區塊
 import SearchIcon from '@mui/icons-material/Search'; // 搜索圖案
 import Dramalist from './components/Dramalist';
+import Classlist from './components/Classlist';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 //import './App.css' // 保留此 import
-import Cardlist from './components/Cardlist.tsx';
-
+import AddDrama from './components/AddDrama';
+import { Snackbar } from '@mui/material';
 
 
 const queryClient = new QueryClient();
-const pages = ['首頁', '電視劇', '電影'];
+const pages = ['首頁', '電視劇', '類別'];
 const settings = ['Login'];
 
 function App() {
@@ -137,8 +138,23 @@ function App() {
       </Container>
     </AppBar>
     <QueryClientProvider client={queryClient}>
-      <Dramalist/>
-    </QueryClientProvider>
+            <BrowserRouter>
+                <Box display="100%" flexDirection="column" alignItems="center" justifyContent="center" height="100vh">
+                    <nav style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}>
+                        <AddDrama />
+                        <Link to="/">電視劇</Link>
+                        {' | '}
+                        <Link to="/Classlist">類別</Link>
+                    </nav>
+                    <Routes>
+                        <Route path="/" element={<Dramalist />} />
+                        <Route path="Classlist" element={<Classlist />} />
+                    </Routes>
+                </Box>
+            </BrowserRouter>
+        </QueryClientProvider>
+        
+
     </>
     
   );

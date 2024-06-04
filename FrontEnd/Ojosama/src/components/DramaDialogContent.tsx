@@ -1,49 +1,79 @@
 import DialogContent from '@mui/material/DialogContent';
-
+import TextField from '@mui/material/TextField';
 
 type DialogFormProps = {
-    drama: Drama;
+    drama: {
+        dramaName: string;
+        dramaCountry: string;
+        dramaIntro: string;
+        dramaYear: string;
+        dramaEpisode: string;
+    };
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
+    readOnly?: boolean; // 添加 readOnly 屬性
+};
 
-function DramaDialogContent({ drama, handleChange}: DialogFormProps) {
+function DramaDialogContent({ drama, handleChange, readOnly = false }: DialogFormProps) {
     return (
-    <DialogContent>
-    <input
-    placeholder="Name"
-    name="dramaName"
-    value={drama.dramaName}
-    onChange={handleChange}
-  />
-  <br />
-  <input
-    placeholder="Country"
-    name="dramaCountry"
-    value={drama.dramaCountry}
-    onChange={handleChange}
-  />
-  <br />
-  <input
-    placeholder="Intro"
-    name="dramaIntro"
-    value={drama.dramaIntro}
-    onChange={handleChange}
-  />
-  <br />
-  <input
-    placeholder="Year"
-    name="dramaYear"
-    value={drama.dramaYear}
-    onChange={handleChange}
-  />
-  <br />
-  <input
-    placeholder="Episode"
-    name="dramaEpisode"
-    value={drama.dramaEpisode}
-    onChange={handleChange}
-  />
-    </DialogContent>
+        <DialogContent>
+            <TextField
+                label="Name"
+                name="dramaName"
+                value={drama.dramaName}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                InputProps={{
+                    readOnly: readOnly,
+                }}
+            />
+            <TextField
+                label="Country"
+                name="dramaCountry"
+                value={drama.dramaCountry}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                InputProps={{
+                    readOnly: readOnly,
+                }}
+            />
+            <TextField
+                label="Intro"
+                name="dramaIntro"
+                value={drama.dramaIntro}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                multiline
+                rows={4} // 设置行数
+                InputProps={{
+                    readOnly: readOnly,
+                }}
+            />
+            <TextField
+                label="Year"
+                name="dramaYear"
+                value={drama.dramaYear}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                InputProps={{
+                    readOnly: readOnly,
+                }}
+            />
+            <TextField
+                label="Episode"
+                name="dramaEpisode"
+                value={drama.dramaEpisode}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                InputProps={{
+                    readOnly: readOnly,
+                }}
+            />
+        </DialogContent>
     );
 }
 

@@ -17,7 +17,7 @@ type DramaEntry = {
     url: string;
 }
 
-function EditDrama({ dramadata }: FormProps) {
+function DetailDrama({ dramadata }: FormProps) {
     const [drama, setDrama] = useState<Drama>({
         dramaName: '',
         dramaCountry: '',
@@ -73,23 +73,15 @@ function EditDrama({ dramadata }: FormProps) {
 
     return (
         <>
-            <Button variant="contained" color="primary" onClick={handleClickOpen}>
-                編輯
+            <Button variant="contained" color="success" onClick={handleClickOpen}>
+                詳細
             </Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Edit Drama</DialogTitle>
+                <DialogTitle>Detail Drama</DialogTitle>
                 <DramaDialogContent drama={drama} handleChange={handleChange} />
-                <DialogActions>
-                    <Button onClick={handleClose} color="secondary">
-                        Cancel
-                    </Button>
-                    <Button onClick={handleSave} color="primary">
-                        Save
-                    </Button>
-                </DialogActions>
             </Dialog>
         </>
     );
 }
 
-export default EditDrama;
+export default DetailDrama;

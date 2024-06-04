@@ -1,5 +1,4 @@
 export type DramaResponse = {
-    "id" : number;
     "dramaName" : string;
     "dramaCountry" : string;
     "dramaIntro" : string;
@@ -15,7 +14,6 @@ export type DramaResponse = {
     }
 }
 export type Drama = {
-    "id" : number;
     "dramaName" : string;
     "dramaCountry" : string;
     "dramaIntro" : string;
@@ -25,5 +23,29 @@ export type Drama = {
 
 export type DramaEntry = {
     drama: Drama;
+    url: string;
+}
+
+export type  ClassResponse ={
+    "className" : string,
+    "_links" : {
+    "self" : {
+        "href" : string;
+    },
+    "class" : {
+        "href" : string;
+    },
+    "classOfDramas" : {
+        "href" : string;
+    }
+    }
+}
+
+export type Class = {
+    "className" : string;
+}
+
+export type ClassEntry = {
+    class: Class;
     url: string;
 }

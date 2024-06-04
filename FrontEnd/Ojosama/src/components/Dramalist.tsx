@@ -8,6 +8,7 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import AddDrama from "./AddDrama";
 import EditDrama from "./EditDrama";
+import DetailDrama from "./DetailDrama";
 
 
 function Dramalist() {
@@ -48,6 +49,16 @@ const columns: GridColDef[] = [
             <EditDrama dramadata={params.row} />
     },
     {
+        field: 'detail',
+        headerName: '',
+        width: 90,
+        sortable: false,
+        filterable: false,
+        disableColumnMenu: true,
+        renderCell: (params: GridCellParams) => 
+            <DetailDrama dramadata={params.row} />
+    },
+    {
         field: "delete",
         headerName: "",
         width: 90,
@@ -69,7 +80,7 @@ const columns: GridColDef[] = [
             }
             }}
         >
-            Delete
+            刪除
             </Button>
         );
     },
@@ -90,7 +101,6 @@ const columns: GridColDef[] = [
 
   return (
     <>
-    <AddDrama />
     <div
         style={{
         display: "flex",

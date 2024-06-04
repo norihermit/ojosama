@@ -3,58 +3,90 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { addDrama } from '../api/videoapi';
+import { addDrama } from "../api/videoapi";
 import DramaDialogContent from "./DramaDialogContent";
+import { Button, Snackbar } from '@mui/material';
 
 function AddDrama() {
-const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-const handleClickOpen = () => {
+  const handleClickOpen = () => {
     setOpen(true);
-};
+  };
 
-const handleClose = () => {
+  const handleClose = () => {
     setOpen(false);
-};
+  };
 
-const handleChange = (event : React.ChangeEvent<HTMLInputElement>) =>
-    {setDrama({...drama, [event.target.name]:event.target.value});}
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDrama({ ...drama, [event.target.name]: event.target.value });
+  };
 
-const handleSave = () => {
+  const handleSnackbarClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+        return;
+    }
+    setSnackbarOpen(false);
+  };
+
+  const handleSave = () => {
     mutate(drama);
-    setDrama({ dramaName: '', dramaCountry: '', dramaIntro:'', dramaYear: 0 ,dramaEpisode:0});
+    setDrama({
+      dramaName: "",
+      dramaCountry: "",
+      dramaIntro: "",
+      dramaYear: "",
+      dramaEpisode: "",
+    });
     handleClose();
-}
+    setSnackbarOpen(true); // Show the Snackbar when saving
+  };
 
-
-const [drama, setDrama] = useState<Drama>({
+  const [drama, setDrama] = useState({
     dramaName: "",
     dramaCountry: "",
     dramaIntro: "",
     dramaYear: "",
-    dramaEpisode: ""
-});
+    dramaEpisode: "",
+  });
 
-const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
-  // Add inside the AddCar component function
-const { mutate } = useMutation(addDrama, {
-    onSuccess: () => {queryClient.invalidateQueries(["dramas"]);},
-    onError: (err) => {console.error(err);},
-});
+  const { mutate } = useMutation(addDrama, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["dramas"]);
+    },
+    onError: (err) => {
+      console.error(err);
+    },
+  });
 
-return (
+  return (
     <>
-    <button onClick={handleClickOpen}>New drama</button>
-    <Dialog open={open} onClose={handleClose}>
+      <Button variant="contained" color="secondary" onClick={handleClickOpen}>
+        增加戲劇
+      </Button>
+      <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New Drama</DialogTitle>
-        <DramaDialogContent drama={drama} handleChange={handleChange}/>
+        <DramaDialogContent drama={drama} handleChange={handleChange} />
         <DialogActions>
-            <button onClick={handleClose}>Cancel</button>
-            <button onClick={handleSave}>Save</button>
+          <Button onClick={handleClose} color="secondary">
+            Cancel
+          </Button>
+          <Button onClick={handleSave} color="primary">
+            Save
+          </Button>
         </DialogActions>
-    </Dialog>
+      </Dialog>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={2000}
+        onClose={handleSnackbarClose}
+        message="Drama added"
+      />
     </>
-);
+  );
 }
+
 export default AddDrama;
