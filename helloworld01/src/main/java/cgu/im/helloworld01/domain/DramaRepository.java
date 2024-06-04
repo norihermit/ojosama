@@ -39,4 +39,14 @@ public interface DramaRepository extends CrudRepository<Drama, Long> {
     nativeQuery = true)
     
     List<Drama> findDramaWithClassesByClassName(@Param("className") String className);
+    
+    @Query(value = "SELECT d.id AS id, d.drama_name AS dramaName, d.drama_country AS dramaCountry, d.drama_intro AS dramaIntro, d.drama_year AS dramaYear, d.drama_episode AS dramaEpisode, " +
+            "GROUP_CONCAT(c.class_name) AS dramaClass " +
+            "FROM class_of_drama cod " +
+            "JOIN drama d ON d.id = cod.drama_id " +
+            "JOIN class c ON cod.class_id = c.classid " +
+            "WHERE c.class_name = :className " +
+            "GROUP BY d.id, d.drama_name, d.drama_country, d.drama_intro, d.drama_year, d.drama_episode",
+            nativeQuery = true)
+    List<DramaDTO> findDramaWithClassesByClassName1(@Param("className") String className);
 }

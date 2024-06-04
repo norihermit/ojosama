@@ -11,54 +11,50 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "classOfDrama")
+@Table(name = "class_of_drama")
 public class ClassOfDrama {
-	 	@Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
-	 	
-	 	@JsonIgnore
-	    @ManyToOne
-	    @JoinColumn(name = "drama_id")
-	    private Drama dramaId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	 	@JsonIgnore
-	    @ManyToOne
-	    @JoinColumn(name = "class_id")
-	    private Class classId;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "drama_id")
+    private Drama dramaId;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "class_id")
+    private Class classId;
 
-	    public ClassOfDrama() {}
+    public ClassOfDrama() {}
 
-		public ClassOfDrama(Drama dramaId, Class classId) {
-			super();
-			this.dramaId = dramaId;
-			this.classId = classId;
-		}
+    public ClassOfDrama(Drama dramaId, Class classId) {
+        this.dramaId = dramaId;
+        this.classId = classId;
+    }
 
-		public Long getId() {
-			return id;
-		}
+    public Long getId() {
+        return id;
+    }
 
-		public void setId(Long id) {
-			this.id = id;
-		}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-		public Drama getDramaId() {
-			return dramaId;
-		}
+    public Drama getDramaId() {
+        return dramaId;
+    }
 
-		public void setDramaId(Drama dramaId) {
-			this.dramaId = dramaId;
-		}
+    public void setDramaId(Drama dramaId) {
+        this.dramaId = dramaId;
+    }
 
-		public Class getClassId() {
-			return classId;
-		}
+    public Class getClassId() {
+        return classId;
+    }
 
-		public void setClassId(Class classId) {
-			this.classId = classId;
-		}
-
-
+    public void setClassId(Class classId) {
+        this.classId = classId;
+    }
 }

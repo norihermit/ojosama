@@ -137,7 +137,7 @@ function App() {
         </Toolbar>
       </Container>
     </AppBar>
-    <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={queryClient}>
             <BrowserRouter>
                 <Box display="100%" flexDirection="column" alignItems="center" justifyContent="center" height="100vh">
                     <nav style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}>

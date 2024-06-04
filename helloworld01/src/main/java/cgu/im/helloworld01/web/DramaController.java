@@ -1,23 +1,27 @@
 package cgu.im.helloworld01.web;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import cgu.im.helloworld01.domain.Drama;
+import cgu.im.helloworld01.domain.DramaDTO;
 import cgu.im.helloworld01.domain.DramaRepository;
 
-@RestController
-public class DramaController {
-	
-	private final DramaRepository drepository;
-	public DramaController(DramaRepository drepository) {
-		super();
-		this.drepository = drepository;
-	}
+import java.util.List;
 
-	@GetMapping("/dramas")
-    public Iterable<Drama> getDramas() {
-		//Fetch and return cars
-    	return drepository.findAll();
-	}
+@RestController
+@CrossOrigin(origins = "http://localhost:5173")
+public class DramaController {
+
+    private final DramaRepository dramaRepository;
+
+    public DramaController(DramaRepository dramaRepository) {
+        this.dramaRepository = dramaRepository;
+    }
+
+    @GetMapping("/api/dramasByClass")
+    public List<DramaDTO> getDramasByClassName(@RequestParam String className) {
+        return dramaRepository.findDramaWithClassesByClassName1(className);
+    }
 }
