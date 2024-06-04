@@ -1,4 +1,5 @@
 export type DramaResponse = {
+    "id" : number;
     "dramaName" : string;
     "dramaCountry" : string;
     "dramaIntro" : string;
@@ -14,6 +15,7 @@ export type DramaResponse = {
     }
 }
 export type Drama = {
+    "id" : number;
     "dramaName" : string;
     "dramaCountry" : string;
     "dramaIntro" : string;
@@ -25,4 +27,3 @@ export type DramaEntry = {
     drama: Drama;
     url: string;
 }
-
