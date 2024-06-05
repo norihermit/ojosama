@@ -82,8 +82,7 @@ function Classlist() {
                                     { field: 'dramaCountry', headerName: '國家', width: 200 },
                                     { field: 'dramaIntro', headerName: '簡介', width: 400 },
                                     { field: 'dramaYear', headerName: '年份', width: 100 },
-                                    { field: 'dramaEpisode', headerName: '集數', width: 100 },
-                                    { field: 'dramaClass', headerName: '類別', width: 200 }
+                                    { field: 'dramaEpisode', headerName: '集數', width: 100 }
                                 ]}
                                 getRowId={(row) => row.id}
                                 autoHeight
